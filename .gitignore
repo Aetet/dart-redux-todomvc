@@ -1,0 +1,9 @@
+.idea
+node_modules
+docs
+*.swp
+dart/.packages
+dart/packages
+dart/pubspec.lock
+dart/web/packages
+dart/build
