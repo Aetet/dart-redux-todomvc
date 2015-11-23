@@ -30,7 +30,7 @@ module.exports = {
     }, {
       test: /main\.dart\.js$/,
       loaders: [
-        'exports?state=window.dartState'
+        'exports?state=window.dartState&addTodo=window.dartAddTodo'
       ]
     }]
   }
