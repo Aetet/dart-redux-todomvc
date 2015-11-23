@@ -7,7 +7,10 @@ import configureStore from './store/configureStore'
 import 'todomvc-app-css/index.css'
 import './dart/build/web/main.dart.js'
 
+console.log('Dart state is here: ', JSON.stringify(window.dartState, null, 4));
+
 const store = configureStore()
+
 
 render(
   <Provider store={store}>
