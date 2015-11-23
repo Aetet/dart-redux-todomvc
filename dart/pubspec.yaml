@@ -1,0 +1,7 @@
+name: dart_redux
+dependencies:
+  browser: any
+  js: ^0.6.0
+transformers:
+  - $dart2js:
+      $include: ["web/main.dart"]
