@@ -27,6 +27,11 @@ module.exports = {
       test: /\.css?$/,
       loaders: [ 'style', 'raw' ],
       include: __dirname
+    }, {
+      test: /main\.dart\.js$/,
+      loaders: [
+        'exports?state=window.dartState'
+      ]
     }]
   }
 }
