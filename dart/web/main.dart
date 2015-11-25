@@ -8,9 +8,7 @@ int findNextId(List<Todo> list) {
 }
 
 List<Todo> addTodo(List<Todo> todos, String text) {
-  List list = new List.from(todos);
-
-  int id = findNextId(list) + 1;
+  int id = findNextId(todos) + 1;
 
   List<Todo> newTodos = [new Todo(
       id: id,
@@ -18,7 +16,7 @@ List<Todo> addTodo(List<Todo> todos, String text) {
       completed: false
   )];
 
-  list.fold(newTodos, (List<Todo> todos, item) {
+  todos.fold(newTodos, (List<Todo> todos, item) {
     Todo todo = new Todo(
         id: item.id,
         text: item.text,
