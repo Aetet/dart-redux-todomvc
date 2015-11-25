@@ -7,17 +7,32 @@ int findNextId(List<Todo> list) {
   });
 }
 
-void modifyFirst(List<Todo> todos) {
-  print('todos: ${todos[0].text}');
-  Todo com = todos.elementAt(0);
-  com.text = "OOOF!";
-  todos.insert(0, com);
-  print('todos after: ${todos[0].text}');
-  alertJS('Oh, we modify first element!');
+@JS('document.createElement')
+external HtmlElement createDomElement(String el);
+
+@JS()
+class HtmlElement {
+  external void set innerHtml(String html);
 }
 
-@JS('alert')
-external alertJS(String text);
+@JS('document.body.appendChild')
+external appendChild(elem);
+
+logToDom(String text) {
+  dynamic div = createDomElement('div');
+  div.innerHtml = text;
+  appendChild(div);
+}
+
+@JS('JSON.stringify')
+external String stringify(data, String par, int offset);
+
+void modifyFirst(List<Todo> todos) {
+  logToDom('====todos==== ${stringify(todos, null, 4)}');
+  Todo com = todos.first;
+  com.text = "OOOF!";
+  logToDom('====todos after====== ${stringify(todos, null, 4)}');
+}
 
 @JS()
 @anonymous
