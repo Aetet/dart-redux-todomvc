@@ -1,30 +1,12 @@
 import { ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, COMPLETE_ALL, CLEAR_COMPLETED } from '../constants/ActionTypes'
 import {state, addTodo} from '../dart/build/web/main.dart.js'
 
-const initialState = [
-  {
-    text: 'Use Redux',
-    completed: false,
-    id: 0
-  }
-]
+const initialState = state;
 
 export default function todos(state = initialState, action) {
   switch (action.type) {
     case ADD_TODO:
-          var res = addTodo(JSON.stringify({todos: state}), action.text);
-          return res.todos;
-        /*
-      return [
-        {
-          id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
-          completed: false,
-          text: action.text
-        }, 
-        ...state
-      ]
-      */
-
+      return addTodo(state, action.text);
     case DELETE_TODO:
       return state.filter(todo =>
         todo.id !== action.id

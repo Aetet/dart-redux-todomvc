@@ -1,17 +1,14 @@
 library js_interop_example;
 import 'package:js/js.dart';
-import 'dart:convert';
-
 
 int findNextId(List<Todo> list) {
   return list.fold(0 ,(int currentId, dynamic elem) {
-    return (elem['id'] > currentId) ? elem['id'] : currentId;
+    return (elem.id > currentId) ? elem.id : currentId;
   });
 }
 
-State addTodo(String serializedState, String text) {
-  Map state = JSON.decode(serializedState);
-  List list = new List.from(state['todos']);
+List<Todo> addTodo(List<Todo> todos, String text) {
+  List list = new List.from(todos);
 
   int id = findNextId(list) + 1;
 
@@ -23,27 +20,25 @@ State addTodo(String serializedState, String text) {
 
   list.fold(newTodos, (List<Todo> todos, item) {
     Todo todo = new Todo(
-        id: item['id'],
-        text: item['text'],
-        completed: item['completed']
+        id: item.id,
+        text: item.text,
+        completed: item.completed
     );
     todos.add(todo);
 
     return todos;
   });
 
-  return new State(todos: newTodos);
+  return newTodos;
 }
 
 @JS()
 @anonymous
-class State {
-  external List<Todo> get todos;
-  external factory State({List<Todo> todos});
-}
+external List<Todo> get todos;
+external void set todos(List<Todo> todos);
 
 @JS()
-external void set dartState(State state);
+external void set dartState(List<Todo> todos);
 
 @JS()
 external void set dartAddTodo(Function addTodo);
@@ -66,7 +61,7 @@ void main() {
         id: 10
     )
   ];
-  dartState = new State(todos: todos);
+  dartState = todos;
   dartAddTodo = allowInterop(addTodo);
 
 }
