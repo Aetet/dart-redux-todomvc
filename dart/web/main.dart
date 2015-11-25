@@ -45,7 +45,14 @@ class Todo {
   external void set text(String text);
   external bool get completed;
   external int get id;
-  external factory Todo({String text, bool completed, int id});
+  external factory Todo({String text, bool completed, int id, User assigner});
+}
+
+@JS()
+@anonymous
+class User {
+  external String get name;
+  external factory User({String name});
 }
 
 List<Todo> addTodo(List<Todo> todos, String text) {
@@ -83,7 +90,8 @@ void main() {
     new Todo(
         text: 'Add dart to react',
         completed: false,
-        id: 10
+        id: 10,
+        assigner: new User(name: 'John Doe')
     )
   ];
   dartState = todos;
