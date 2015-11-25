@@ -1,7 +1,12 @@
 import { ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, COMPLETE_ALL, CLEAR_COMPLETED } from '../constants/ActionTypes'
-import {state, addTodo} from '../dart/build/web/main.dart.js'
+import {state} from '../dart/build/web/main.dart.js'
 
 const initialState = state;
+alert('state:' + JSON.stringify(state, null, 4));
+
+function addTodo(state) {
+  return state;
+}
 
 export default function todos(state = initialState, action) {
   switch (action.type) {
