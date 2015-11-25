@@ -7,13 +7,26 @@ int findNextId(List<Todo> list) {
   });
 }
 
+@JS()
+@anonymous
+external List<Todo> get todos;
+external void set todos(List<Todo> todos);
+@JS()
+@anonymous
+class Todo {
+  external String get text;
+  external bool get completed;
+  external int get id;
+  external factory Todo({String text, bool completed, int id});
+}
+
 List<Todo> addTodo(List<Todo> todos, String text) {
   int id = findNextId(todos) + 1;
 
   List<Todo> newTodos = [new Todo(
-      id: id,
-      text: text,
-      completed: false
+    id: id,
+    text: text,
+    completed: false
   )];
 
   todos.fold(newTodos, (List<Todo> todos, item) {
@@ -31,27 +44,11 @@ List<Todo> addTodo(List<Todo> todos, String text) {
 }
 
 @JS()
-@anonymous
-external List<Todo> get todos;
-external void set todos(List<Todo> todos);
-
-@JS()
 external void set dartState(List<Todo> todos);
-
 @JS()
 external void set dartAddTodo(Function addTodo);
 
-@JS()
-@anonymous
-class Todo {
-  external String get text;
-  external bool get completed;
-  external int get id;
-  external factory Todo({String text, bool completed, int id});
-}
-
 void main() {
-
   List<Todo> todos = [
     new Todo(
         text: 'Add dart to react',
@@ -61,5 +58,4 @@ void main() {
   ];
   dartState = todos;
   dartAddTodo = allowInterop(addTodo);
-
 }
