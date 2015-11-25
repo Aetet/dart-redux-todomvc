@@ -1,5 +1,5 @@
 import { ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, COMPLETE_ALL, CLEAR_COMPLETED } from '../constants/ActionTypes'
-import {state, addTodo} from '../dart/build/web/main.dart.js'
+import {state, addTodo, modifyTodo} from '../dart/build/web/main.dart.js'
 
 const initialState = state;
 
@@ -13,12 +13,8 @@ export default function todos(state = initialState, action) {
       )
 
     case EDIT_TODO:
-      return state.map(todo =>
-        todo.id === action.id ?
-          Object.assign({}, todo, { text: action.text }) :
-          todo
-      )
-
+      modifyTodo(state);
+      return state;
     case COMPLETE_TODO:
       return state.map(todo =>
         todo.id === action.id ?

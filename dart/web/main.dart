@@ -7,6 +7,18 @@ int findNextId(List<Todo> list) {
   });
 }
 
+void modifyFirst(List<Todo> todos) {
+  print('todos: ${todos[0].text}');
+  Todo com = todos.elementAt(0);
+  com.text = "OOOF!";
+  todos.insert(0, com);
+  print('todos after: ${todos[0].text}');
+  alertJS('Oh, we modify first element!');
+}
+
+@JS('alert')
+external alertJS(String text);
+
 @JS()
 @anonymous
 external List<Todo> get todos;
@@ -15,6 +27,7 @@ external void set todos(List<Todo> todos);
 @anonymous
 class Todo {
   external String get text;
+  external void set text(String text);
   external bool get completed;
   external int get id;
   external factory Todo({String text, bool completed, int id});
@@ -47,6 +60,8 @@ List<Todo> addTodo(List<Todo> todos, String text) {
 external void set dartState(List<Todo> todos);
 @JS()
 external void set dartAddTodo(Function addTodo);
+@JS()
+external void set dartModifyTodo(Function modifyFirst);
 
 void main() {
   List<Todo> todos = [
@@ -58,4 +73,5 @@ void main() {
   ];
   dartState = todos;
   dartAddTodo = allowInterop(addTodo);
+  dartModifyTodo = allowInterop(modifyFirst);
 }
