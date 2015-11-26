@@ -94,8 +94,9 @@ void main() {
         id: 10,
         assigner: new User(name: 'John Doe'),
         modifyTodo: allowInteropCaptureThis((todo) {
+          logToDom('before change: ${todo.text}');
           todo.text = "OOOF!";
-          logToDom('HEYO! ${todo.text}');
+          logToDom('after change: ${todo.text}');
         })
     )
   ];
