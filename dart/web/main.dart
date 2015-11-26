@@ -18,8 +18,8 @@ class HtmlElement {
 @JS('document.body.appendChild')
 external appendChild(elem);
 
-logToDom(String text) {
-  dynamic div = createDomElement('div');
+void logToDom(String text) {
+  HtmlElement div = createDomElement('div');
   div.innerHtml = text;
   appendChild(div);
 }
@@ -46,6 +46,7 @@ class Todo {
   external bool get completed;
   external int get id;
   external Function get modifyTodo;
+  external User get assigner;
   external factory Todo({String text, bool completed, int id, User assigner, Function modifyTodo});
 }
 
