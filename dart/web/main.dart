@@ -45,6 +45,7 @@ class Todo {
   external void set text(String text);
   external bool get completed;
   external int get id;
+  external User get assigner;
   external factory Todo({String text, bool completed, int id, User assigner});
 }
 
