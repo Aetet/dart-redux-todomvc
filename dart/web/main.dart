@@ -19,7 +19,7 @@ class HtmlElement {
 external appendChild(elem);
 
 logToDom(String text) {
-  dynamic div = createDomElement('div');
+  HtmlElement div = createDomElement('div');
   div.innerHtml = text;
   appendChild(div);
 }
