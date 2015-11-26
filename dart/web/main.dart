@@ -45,7 +45,8 @@ class Todo {
   external void set text(String text);
   external bool get completed;
   external int get id;
-  external factory Todo({String text, bool completed, int id, User assigner});
+  external Function get modifyTodo;
+  external factory Todo({String text, bool completed, int id, User assigner, Function modifyTodo});
 }
 
 @JS()
@@ -91,7 +92,11 @@ void main() {
         text: 'Add dart to react',
         completed: false,
         id: 10,
-        assigner: new User(name: 'John Doe')
+        assigner: new User(name: 'John Doe'),
+        modifyTodo: allowInteropCaptureThis((todo) {
+          todo.text = "OOOF!";
+          logToDom('HEYO! ${todo.text}');
+        })
     )
   ];
   dartState = todos;
